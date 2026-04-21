@@ -34,7 +34,7 @@ const main = async () => {
       modbusService.setPump(pumpStatus);
     });
     socket.on(SocketEvent.SET_SETPOINT, (setpointValue: number) => {
-      modbusService.setSetpoint(setpointValue);
+      modbusService.setTemperatureSetpoint(setpointValue);
     });
     socket.on(SocketEvent.DISCONNECT, () => {
       console.log(`User disconnected, id: ${socket.id}`);

@@ -43,11 +43,14 @@ class ModbusService {
 
       const data: BoilerState = {
         temperature: registers.data[ModbusRegisterMap.TEMPERATURE],
-        setpoint: registers.data[ModbusRegisterMap.SETPOINT],
-        batteryLevel: registers.data[ModbusRegisterMap.BATTAREY_LEVEL],
+        pressure: registers.data[ModbusRegisterMap.PRESSURE] * 0.1,
+        temperatureSetpoint: registers.data[ModbusRegisterMap.TEMPERATURE_SETPOINT],
+        batteryLevel: registers.data[ModbusRegisterMap.BATTERY_LEVEL],
+        waterLevel: registers.data[ModbusRegisterMap.WATER_LEVEL],
 
         isHeaterOn: coils.data[ModbusCoilsMap.HEATER],
         isPumpOn: coils.data[ModbusCoilsMap.PUMP],
+        isAlarmError: coils.data[ModbusCoilsMap.ALARM_ERROR],
         hasGridPower: coils.data[ModbusCoilsMap.HAS_GRID_POWER],
       };
 
@@ -87,9 +90,9 @@ class ModbusService {
     }
   }
 
-  async setSetpoint(value: number): Promise<number | null> {
+  async setTemperatureSetpoint(value: number): Promise<number | null> {
     try {
-      await this.client.writeRegister(ModbusRegisterMap.SETPOINT, value);
+      await this.client.writeRegister(ModbusRegisterMap.TEMPERATURE_SETPOINT, value);
 
       console.log(`Setpoint has set to ${value}`);
 
