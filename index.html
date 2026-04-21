@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SCADA Test</title>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>Консоль разработчика (F12) - наш лучший друг</h1>
+    <script>
+      // Подключаемся к твоему бэкенду
+      const socket = io("http://localhost:3001");
+
+      // Слушаем данные от котла
+      socket.on("boiler-state", (data) => {
+        console.log("Данные от ПЛК:", data);
+      });
+    </script>
+  </body>
+</html>
