@@ -1,0 +1,9 @@
+{
+  "name": "web-scada",
+  "private": true,
+  "workspaces": [
+    "client/*",
+    "server/*",
+    "packages/*"
+  ]
+}
