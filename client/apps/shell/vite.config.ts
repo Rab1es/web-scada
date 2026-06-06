@@ -10,7 +10,7 @@ export default defineConfig({
       remotes: {
         monitoring: "http://localhost:5001/assets/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "antd"],
     }),
   ],
   server: {

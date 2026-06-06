@@ -10,8 +10,9 @@ export default defineConfig({
       filename: "remoteEntry.js",
       exposes: {
         "./SensorPanel": "./src/components/sensor-panel/index.ts",
+        "./Dashboard": "./src/pages/dashboard/index.ts",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "antd"],
     }),
   ],
   server: {

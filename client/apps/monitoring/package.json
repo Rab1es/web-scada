@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "build": "vite build",
+    "watch": "vite build --watch",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.2.5",
+    "antd": "^6.4.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },

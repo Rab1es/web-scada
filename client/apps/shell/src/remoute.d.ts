@@ -5,3 +5,9 @@ declare module "monitoring/SensorPanel" {
   const SensorPanel: ComponentType<SensorPanelProps>;
   export default SensorPanel;
 }
+
+declare module "monitoring/Dashboard" {
+  import type { ComponentType } from "react";
+  const Dashboard: ComponentType;
+  export default Dashboard;
+}
