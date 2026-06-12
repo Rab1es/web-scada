@@ -1,5 +1,39 @@
+/* index.css */
+:root {
+  /* --- Фоны (Backgrounds) --- */
+  --bg-app: #000000; /* Глубокий черный для подложки контента */
+  --bg-header: #001529; /* Темно-синий для хедера и сайдбара (классика AntD) */
+  --bg-card: #1f2430; /* Чуть светлее черного для карточек, чтобы был объем */
+  --bg-card-header: #1f1f1f; /* Еще чуть светлее для шапки карточек */
+
+  /* --- Текст (Typography) --- */
+  --text-main: rgba(255, 255, 255, 0.85); /* Основной белый (не режет глаза) */
+  --text-muted: rgba(255, 255, 255, 0.45); /* Приглушенный серый для подписей */
+
+  /* --- Линии и границы (Borders) --- */
+  --border-base: #2a2e39; /* Темно-серый для рамок карточек */
+
+  /* --- Статусные цвета (Status) --- */
+  --color-primary: #1890ff;
+  --color-danger: #cf1322;
+  --color-success: #389e0d;
+  --color-default: #d1d4dc;
+  --color-warning: #faad14;
+  --color-muted: #595959;
+
+  --typography-primary: #d1d4dc;
+  --typography-secondary: #787b86;
+}
+
 body {
   margin: 0;
   padding: 0;
   overflow: hidden; /* Забороняє загальний скрол сторінки */
+}
+.ant-layout-header {
+  border-bottom: 1px solid #2a2e39 !important;
+}
+
+.ant-layout-sider {
+  border-right: 1px solid #2a2e39 !important;
 }

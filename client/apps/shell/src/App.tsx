@@ -150,7 +150,7 @@ function App() {
         algorithm: theme.darkAlgorithm,
         // Сюда же можно добавить фирменный цвет котельной (например, оранжевый или синий)
         token: {
-          colorPrimary: "#1890ff",
+          colorPrimary: "#177ddc",
           colorBgBase: "#131722",
           colorBgContainer: "#141414",
           colorTextBase: "rgba(255, 255, 255, 0.85)",
@@ -160,6 +160,10 @@ function App() {
           Layout: {
             headerBg: "#1e222d",
             siderBg: "#1e222d",
+            bodyBg: "#131722",
+          },
+          Menu: {
+            darkItemBg: "#1e222d", // Чтобы фон меню совпадал с сайдбаром
           },
         },
       }}

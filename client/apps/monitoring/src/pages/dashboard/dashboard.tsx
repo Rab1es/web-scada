@@ -1,8 +1,9 @@
 import { Row, Col, Card } from "antd";
 import { type FC } from "react";
 import { type DashboardProps } from "@scada/shared-types";
-import { MimicPanel } from "../../components/widgets/mimic-panel";
 import styles from "./dashboard.module.css";
+import { BoilerMetrics } from "../../components/widgets/boiler-metrics";
+import { ScadaTypography } from "../../components/typography";
 
 export const Dashboard: FC<DashboardProps> = ({
   tempSupply = 20,
@@ -21,35 +22,23 @@ export const Dashboard: FC<DashboardProps> = ({
   sendCommand,
 }) => {
   return (
-    <Card
-      title="Оперативні дані котельні (Панель моніторингу)"
-      style={{ width: "100%" }}
-      className={styles.dashboardWidgetCardContainer}
-    >
-      {/* 1. БЛОК КЕРУВАННЯ */}
+    <div style={{ padding: "24px", width: "100%" }}>
+      {/* Простой заголовок страницы */}
+      <ScadaTypography variant="header">
+        Оперативні дані котельні (Панель моніторингу)
+      </ScadaTypography>
 
-      {/* 2. ТЕХНОЛОГІЧНІ ВУЗЛИ (3 колонки) */}
+      {/* Дальше сразу идет твоя сетка Row/Col и виджеты */}
       <Row gutter={[16, 16]}>
-        {/* ВУЗОЛ 1: КОТЕЛ */}
-        <Col xs={24} md={8}></Col>
-
-        {/* ВУЗОЛ 2: МЕРЕЖА */}
-        <Col xs={24} md={8}></Col>
-
-        {/* ВУЗОЛ 3: СЕРЕДОВИЩЕ ТА БЕЗПЕКА */}
-        <Col xs={24} md={8}></Col>
-
-        <Col xs={24} md={8}>
-          <MimicPanel
-            tempReturn={tempReturn}
-            tempSupply={tempSupply}
-            pumpSpeed={pumpSpeed}
+        <Col span={8}>
+          <BoilerMetrics
             flameActive={flameActive}
-            pressure={pressure}
-            pumpActive={pumpActive}
+            tempSupply={tempSupply}
+            tempReturn={tempReturn}
           />
         </Col>
+        {/* Остальные виджеты... */}
       </Row>
-    </Card>
+    </div>
   );
 };

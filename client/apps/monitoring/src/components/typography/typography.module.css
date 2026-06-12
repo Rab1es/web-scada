@@ -1,0 +1,81 @@
+/* Базові стилі */
+.textBase {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.3s ease; /* Плавна зміна кольору для статусів */
+}
+
+/* --- ЗАГОЛОВКИ --- */
+/* Головний заголовок сторінки (Оперативні дані...) */
+.header {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--typography-primary);
+}
+
+/* Заголовки карток (Котел, Мережа...) */
+.headerS {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--typography-primary);
+}
+
+/* Дрібні заголовки-підписи (Назви параметрів над цифрами) */
+.headerXs {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--typography-secondar);
+  text-transform: uppercase; /* Робимо великими літерами */
+  letter-spacing: 0.05em; /* Трохи розсуваємо літери для індустріального вигляду */
+}
+
+/* --- ТЕКСТОВІ ЕЛЕМЕНТИ --- */
+/* Звичайний підпис (якщо uppercase з headerXs здасться занадто грубим) */
+.label {
+  font-size: 14px;
+  color: var(--typography-secondar);
+  font-weight: 400;
+}
+
+/* Значення датчиків */
+.value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--typography-primary);
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Одиниці виміру */
+.unit {
+  font-size: 16px;
+  color: var(--typography-secondar);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+/* Текстові статуси (Насос працює, Полум'я горить) */
+.status {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* --- КОЛЬОРОВІ МОДИФІКАТОРИ --- */
+.default {
+  color: var(--color-default);
+}
+.danger {
+  color: var(--color-danger);
+}
+.success {
+  color: var(--color-success);
+}
+.warning {
+  color: var(--color-warning);
+}
+.primary {
+  color: var(--color-primary);
+}
+.muted {
+  color: var(--color-muted);
+}

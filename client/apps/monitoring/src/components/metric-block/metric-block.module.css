@@ -1,0 +1,42 @@
+.metricBlock {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  background-color: rgba(
+    18,
+    18,
+    18,
+    0.5
+  ); /* Робимо відчутно темніше (було 0.03 білого) */
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.metricBlock:last-child {
+  margin-bottom: 0;
+}
+
+/* Кольорові маркери зліва */
+.borderRed {
+  border-left: 4px solid var(--color-danger);
+}
+.borderBlue {
+  border-left: 4px solid var(--color-primary);
+}
+.borderNeutral {
+  border-left: 4px solid var(--border-base);
+}
+.borderGreen {
+  border-left: 4px solid var(--color-success,);
+}
+.borderOrange {
+  border-left: 4px solid var(--color-warning,);
+}
+
+/* Зручне вирівнювання значення і одиниць виміру */
+.valueWrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 4px;
+}
