@@ -1,6 +1,6 @@
-import type { WithSocketProps } from "@scada/shared-types";
+import type { SoftwareData, WithSocketProps } from "@scada/shared-types";
 
-export interface HeaderProps extends WithSocketProps {
-  hasGridPower: boolean;
-  isAutoMode: boolean;
-}
+export interface HeaderProps
+  extends
+    WithSocketProps,
+    Pick<SoftwareData, "hasGridPower" | "isAutoMode" | "isEmergencyStop"> {}

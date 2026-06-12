@@ -19,10 +19,10 @@ export const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { key: "/", icon: <DashboardOutlined />, label: "Головна схема" },
-    { key: "/power", icon: <ThunderboltOutlined />, label: "Енергетика" },
-    { key: "/charts", icon: <LineChartOutlined />, label: "Графіки" },
-    { key: "/logs", icon: <UnorderedListOutlined />, label: "Журнал подій" },
+    { key: "/", icon: <DashboardOutlined />, label: "Dashboard" },
+    { key: "/power", icon: <ThunderboltOutlined />, label: "Power System" },
+    { key: "/charts", icon: <LineChartOutlined />, label: "Analytics" },
+    { key: "/logs", icon: <UnorderedListOutlined />, label: "Event Log" },
   ];
 
   return (

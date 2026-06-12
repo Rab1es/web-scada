@@ -12,10 +12,11 @@ import {
   ThunderboltOutlined,
   PoweroffOutlined,
   CheckCircleOutlined,
+  SafetyCertificateOutlined,
 } from "@ant-design/icons";
-import "./index.css";
 import type { HeaderProps } from "./types";
 import { SocketEvent, type SockectMessage } from "@scada/shared-types";
+import styles from "./header.module.css";
 
 const { Header } = Layout;
 const { Text, Title } = Typography;
@@ -23,6 +24,7 @@ const { Text, Title } = Typography;
 export const AppHeader: FC<HeaderProps> = ({
   hasGridPower,
   isAutoMode,
+  isEmergencyStop,
   sendCommand,
 }) => {
   // Стейт для годинника
@@ -50,9 +52,9 @@ export const AppHeader: FC<HeaderProps> = ({
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0 24px",
-        background: "#fff",
         borderBottom: "1px solid #f0f0f0",
       }}
+      //className={styles.header}
     >
       {/* Ліва частина: Заголовок */}
       <div>
@@ -80,7 +82,7 @@ export const AppHeader: FC<HeaderProps> = ({
           <Tag
             color="warning"
             icon={<ThunderboltOutlined />}
-            className="pulsing-ups" // Цей клас ми опишемо в CSS
+            className={styles.pulsingUps} // Цей клас ми опишемо в CSS
             style={{ fontSize: "14px", padding: "4px 10px", margin: 0 }}
           >
             Робота від ДБЖ
@@ -102,26 +104,44 @@ export const AppHeader: FC<HeaderProps> = ({
           </Text>
         </Space>
 
-        {/* Кнопка аварійної зупинки E-Stop */}
-        <Popconfirm
-          title="Увага! Аварійна зупинка!"
-          description="Ви впевнені, що хочете повністю зупинити котельню?"
-          onConfirm={() =>
-            sendCommand({ command: SocketEvent.EMERGENCY_STOP, value: true })
-          }
-          okText="Зупинити"
-          cancelText="Відміна"
-          okButtonProps={{ danger: true }}
-        >
-          <Button
-            type="primary"
-            danger
-            icon={<PoweroffOutlined />}
-            size="large"
+        <Space size="middle">
+          {/* Кнопка деблокування (з'являється тільки під час аварії) */}
+          {isEmergencyStop && (
+            <Button
+              type="primary"
+              style={{ backgroundColor: "#52c41a" }}
+              icon={<SafetyCertificateOutlined />}
+              onClick={() =>
+                sendCommand({ command: "emergency-stop", value: false })
+              }
+            >
+              СКИДАННЯ АВАРІЇ
+            </Button>
+          )}
+
+          {/* Основна кнопка E-STOP */}
+          <Popconfirm
+            title="Увага! Аварійна зупинка!"
+            description="Ви впевнені, що хочете повністю зупинити котельню?"
+            onConfirm={() =>
+              sendCommand({ command: "emergency-stop", value: true })
+            }
+            okText="Зупинити"
+            cancelText="Відміна"
+            okButtonProps={{ danger: true }}
+            disabled={isEmergencyStop} // Вимикаємо, якщо вже в аварії
           >
-            E-STOP
-          </Button>
-        </Popconfirm>
+            <Button
+              type="primary"
+              danger
+              icon={<PoweroffOutlined />}
+              size="large"
+              disabled={isEmergencyStop}
+            >
+              E-STOP
+            </Button>
+          </Popconfirm>
+        </Space>
       </Space>
     </Header>
   );

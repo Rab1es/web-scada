@@ -11,6 +11,7 @@ export default defineConfig({
       exposes: {
         "./SensorPanel": "./src/components/sensor-panel/index.ts",
         "./Dashboard": "./src/pages/dashboard/index.ts",
+        "./UpsInfo": "./src/pages/ups-info/index.ts",
       },
       shared: ["react", "react-dom", "antd"],
     }),

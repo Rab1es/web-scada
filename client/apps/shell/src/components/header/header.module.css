@@ -11,7 +11,11 @@
   }
 }
 
-.pulsing-ups {
+.pulsingUps {
   animation: pulse-warning 1.5s infinite;
   border: 1px solid #faad14 !important;
+}
+
+.header {
+  background-color: var(--bg-header);
 }
