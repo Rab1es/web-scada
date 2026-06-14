@@ -1,0 +1,14 @@
+/* Кастомный бордер для MetricBlock */
+.borderPurple {
+  border-left: 4px solid #b37feb !important; /* Приятный неоновый фиолетовый */
+}
+
+/* Кастомный цвет текста для значения */
+.textPurple {
+  color: #b37feb !important;
+}
+
+/* Убираем лишние отступы у полоски прогресса AntD */
+.customProgress :global(.ant-progress-inner) {
+  background-color: rgba(255, 255, 255, 0.1); /* Слегка подсвечиваем трек */
+}

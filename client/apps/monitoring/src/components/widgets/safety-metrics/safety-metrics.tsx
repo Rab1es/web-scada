@@ -2,6 +2,8 @@ import { Progress, Statistic } from "antd";
 import { WidgetCard } from "../../widget-card";
 import { AlertOutlined, GlobalOutlined } from "@ant-design/icons";
 import type { FC } from "react";
+import { MetricBlock } from "../../metric-block";
+import styles from "./safety-metrics.module.css";
 
 interface SafetyMetricsProps {
   //TODO: update types
@@ -18,90 +20,56 @@ export const SafetyMetrics: FC<SafetyMetricsProps> = ({
   tempIndoor,
 }) => {
   const displayIndoorTemp = tempIndoor && tempIndoor > 1 ? tempIndoor : 21.5;
+  const getProgressColor = (temp: number) => {
+    if (temp > 105) return "var(--color-danger, #cf1322)";
+    if (temp > 90) return "var(--color-warning, #faad14)";
+    return "var(--color-success, #52c41a)";
+  };
+
+  const isGasAlarm = gasLevel > 0.5;
   return (
-    <WidgetCard
-      title="Середовище та Безпека"
-      size="small"
-      type="inner"
-      style={{ height: "100%" }}
-    >
-      <WidgetCard
-        bordered
-        size="small"
-        style={{
-          marginBottom: "12px",
-          border:
-            gasLevel && gasLevel > 0.5
-              ? "2px solid #ff4d4f"
-              : "1px solid #d9d9d9",
-          // backgroundColor:
-          //   gasLevel && gasLevel > 0.5 ? "#fff1f0" : "#fff",
-        }}
-      >
-        <Statistic
-          title={
-            <span
-              style={{
-                color: gasLevel && gasLevel > 0.5 ? "#cf1322" : "inherit",
-              }}
-            >
-              Концентрація CH4
-            </span>
-          }
-          value={gasLevel}
-          precision={2}
-          suffix="%"
-          prefix={
-            gasLevel && gasLevel > 0.5 ? (
-              <AlertOutlined style={{ color: "#cf1322" }} />
-            ) : undefined
-          }
-          valueStyle={{
-            color: gasLevel && gasLevel > 0.5 ? "#cf1322" : "inherit",
-          }}
-        />
-      </WidgetCard>
+    <WidgetCard title="Середовище та Безпека">
+      {/* 1. Концентрация газа */}
+      <MetricBlock
+        label="Концентрація CH4"
+        value={gasLevel?.toFixed(2)}
+        unit="%"
+        borderVariant={isGasAlarm ? "danger" : "default"}
+        valueColor={isGasAlarm ? "danger" : "default"}
+        icon={
+          isGasAlarm ? (
+            <AlertOutlined style={{ color: "#cf1322" }} />
+          ) : undefined
+        }
+      />
 
-      <WidgetCard
-        bordered
-        size="small"
-        style={{ borderLeft: "4px solid #52c41a", marginBottom: "12px" }}
-      >
-        <Statistic
-          title="Температура надворі (T_ext)"
-          value={tempOutdoor}
-          precision={1}
-          suffix="°C"
-          valueStyle={{ color: "#389e0d" }}
-          prefix={<GlobalOutlined />}
-        />
-      </WidgetCard>
+      {/* 2. Температура на улице */}
+      <MetricBlock
+        label="Температура надворі (T_ext)"
+        value={tempOutdoor?.toFixed(1)}
+        unit="°C"
+        borderVariant="success"
+        valueColor="success"
+        icon={<GlobalOutlined />}
+      />
 
-      <WidgetCard
-        bordered
-        size="small"
-        style={{ borderLeft: "4px solid purple" }}
+      {/* 3. Температура в помещении + Полоска прогресса */}
+      <MetricBlock
+        label="Температура в приміщенні"
+        value={displayIndoorTemp?.toFixed(1)}
+        unit="°C"
+        className={styles.borderPurple}
+        valueClassName={styles.textPurple}
       >
-        <Statistic
-          title="Температура в приміщенні"
-          value={displayIndoorTemp}
-          precision={1}
-          suffix="°C"
-          valueStyle={{ color: "purple" }}
-        />
         <Progress
-          percent={(tempSupply / 120) * 100} // где 120 - максимальная температура котла
+          className={styles.customProgress}
+          percent={(tempSupply / 120) * 100}
           showInfo={false}
-          strokeColor={
-            tempSupply > 105
-              ? "#cf1322" // Авария (красный)
-              : tempSupply > 90
-                ? "#faad14" // Предупреждение (желтый)
-                : "#52c41a" // Норма (зеленый)
-          }
+          strokeColor={getProgressColor(tempSupply)}
           strokeWidth={6}
+          size="small"
         />
-      </WidgetCard>
+      </MetricBlock>
     </WidgetCard>
   );
 };

@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react";
+import type { FC, PropsWithChildren, ReactNode } from "react";
 import styles from "./metric-block.module.css";
 import { ScadaTypography } from "../typography";
 
@@ -21,7 +21,7 @@ interface MetricBlockProps {
   valueVariant?: "value" | "status"; // По умолчанию оставим "value"
 }
 
-export const MetricBlock: FC<MetricBlockProps> = ({
+export const MetricBlock: FC<PropsWithChildren<MetricBlockProps>> = ({
   label,
   value,
   unit,
@@ -31,6 +31,7 @@ export const MetricBlock: FC<MetricBlockProps> = ({
   valueClassName = "",
   icon,
   valueVariant = "value", // Дефолтное значение для обратной совместимости
+  children,
 }) => {
   const borderClassMap = {
     danger: styles.borderRed,
@@ -67,6 +68,7 @@ export const MetricBlock: FC<MetricBlockProps> = ({
 
         {unit && <ScadaTypography variant="unit">{unit}</ScadaTypography>}
       </div>
+      {children && <div style={{ marginTop: "12px" }}>{children}</div>}
     </div>
   );
 };
