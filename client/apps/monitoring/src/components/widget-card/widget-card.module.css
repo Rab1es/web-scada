@@ -1,25 +1,23 @@
 .widgetCard {
-  background-color: var(--bg-card) !important; /* #181c25 */
-  border: 1px solid var(--border-base) !important; /* #2a2e39 */
-  border-radius: 8px; /* Немного скругляем для современности */
-  overflow: hidden; /* Чтобы контент не вылезал за скругления */
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-base) !important;
+  border-radius: 8px;
+  overflow: hidden;
+
+  /* --- НОВЫЕ ПРАВИЛА ДЛЯ ВЫРАВНИВАНИЯ --- */
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Заставляет карточку тянуться за колонкой AntD */
 }
 
-/* Делаем заголовок карточки отделенным и строгим */
-.widgetCard :global(.ant-card-head) {
-  background-color: rgba(0, 0, 0, 0.2); /* Слегка затемняем шапку */
-  border-bottom: 1px solid var(--border-base);
-  min-height: 40px;
-  padding: 0 16px;
-}
-
-.widgetCard :global(.ant-card-head-title) {
-  color: var(--text-muted);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 12px 0;
-}
+/* ... шапку не трогаем ... */
 
 .widgetCard :global(.ant-card-body) {
   padding: 16px;
+
+  /* --- НОВЫЕ ПРАВИЛА ДЛЯ ТЕЛА КАРТОЧКИ --- */
+  flex: 1; /* Забирает все оставшееся место под шапкой */
+  display: flex;
+  flex-direction: column;
+  /* Можно добавить gap: 16px, если хочешь, чтобы элементы внутри сами раздвигались */
 }
