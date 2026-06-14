@@ -1,3 +1,42 @@
 .controllCardContainer {
   margin-bottom: 24px;
 }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Ось тут магія адаптивної сітки без Row/Col */
+.buttonsContainer {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap; /* Дозволяє блокам падати вниз на вузьких екранах */
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.03); /* Беремо наш стиль для метрик */
+  padding: 12px 16px;
+  border-radius: 6px;
+  flex: 1; /* Обидва блоки займають рівну ширину */
+  min-width: 200px; /* Захист від надмірного стискання на мобілках */
+}
+
+.buttonsRow {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1; /* Кнопки розтягуються на всю ширину свого контейнера */
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--border-base);
+  margin: 20px 0;
+}

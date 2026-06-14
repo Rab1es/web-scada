@@ -4,6 +4,7 @@ import { Slider } from "../../slider";
 import { SocketEvent } from "@scada/shared-types";
 import type { FC } from "react";
 import styles from "./control-panel.module.css";
+import { ScadaTypography } from "../../typography";
 
 interface ControlPanelProps {
   //TODO: update types
@@ -38,59 +39,81 @@ export const ControlPanel: FC<ControlPanelProps> = ({
     isAutoMode || (batteryLevel !== undefined && batteryLevel <= 10);
   return (
     <WidgetCard
-      type="inner"
       title="Параметри керування"
-      className={styles.controllWidgetCardContainer}
+      className={styles.controllCardContainer}
     >
-      <Row gutter={[24, 24]} align="middle">
-        <Col xs={24} xl={12}>
-          <div style={{ color: "rgba(0, 0, 0, 0.45)", marginBottom: "8px" }}>
-            Ручне керування агрегатами
-          </div>
-          <Space wrap>
-            <Button
-              type="primary"
-              danger
-              disabled={isControlDisabled}
-              onClick={() => handleToggleHeater(true)}
-            >
-              Увімк. пальник
-            </Button>
-            <Button
-              disabled={isControlDisabled}
-              onClick={() => handleToggleHeater(false)}
-            >
-              Вимк. пальник
-            </Button>
-            <Button
-              type="primary"
-              disabled={isControlDisabled}
-              onClick={() => handleTogglePump(true)}
-            >
-              Увімк. насос
-            </Button>
-            <Button
-              disabled={isControlDisabled}
-              onClick={() => handleTogglePump(false)}
-            >
-              Вимк. насос
-            </Button>
-          </Space>
-        </Col>
+      {/* --- ВЕРХНІЙ ПОВЕРХ: Кнопки --- */}
+      <div className={styles.section}>
+        <ScadaTypography variant="headerXs">
+          Ручне керування агрегатами
+        </ScadaTypography>
 
-        <Col xs={24} xl={12}>
-          <Slider
-            title="Уставка температури теплоносія"
-            min={0}
-            max={90}
-            currentValue={temperatureSetpoint}
-            onApply={handleSetTemperatureSetpoint}
-            unit="°C"
-            isRange
-            disabled={isAutoMode || hasGridPower === false}
-          />
-        </Col>
-      </Row>
+        <div className={styles.buttonsContainer}>
+          {/* Пальник */}
+          <div className={styles.buttonGroup}>
+            <ScadaTypography variant="label">Пальник</ScadaTypography>
+            <div className={styles.buttonsRow}>
+              <Button
+                type="primary"
+                danger
+                disabled={isControlDisabled}
+                onClick={() => handleToggleHeater(true)}
+                className={styles.btn}
+              >
+                Увімк.
+              </Button>
+              <Button
+                disabled={isControlDisabled}
+                onClick={() => handleToggleHeater(false)}
+                className={styles.btn}
+              >
+                Вимк.
+              </Button>
+            </div>
+          </div>
+
+          {/* Насос */}
+          <div className={styles.buttonGroup}>
+            <ScadaTypography variant="label">
+              Циркуляційний насос
+            </ScadaTypography>
+            <div className={styles.buttonsRow}>
+              <Button
+                type="primary"
+                disabled={isControlDisabled}
+                onClick={() => handleTogglePump(true)}
+                className={styles.btn}
+              >
+                Увімк.
+              </Button>
+              <Button
+                disabled={isControlDisabled}
+                onClick={() => handleTogglePump(false)}
+                className={styles.btn}
+              >
+                Вимк.
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- РОЗДІЛЮВАЧ --- */}
+      <div className={styles.divider} />
+
+      {/* --- НИЖНІЙ ПОВЕРХ: Уставка (твій кастомний компонент) --- */}
+      <div className={styles.section}>
+        <Slider
+          title="Уставка температури теплоносія (Гістерезис)"
+          min={0}
+          max={90}
+          currentValue={temperatureSetpoint}
+          onApply={handleSetTemperatureSetpoint}
+          unit="°C"
+          isRange
+          disabled={isAutoMode || hasGridPower === false}
+        />
+      </div>
     </WidgetCard>
   );
 };
