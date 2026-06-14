@@ -15,7 +15,7 @@ export const WidgetCard: FC<WidgetCardProps> = ({
   return (
     <Card
       className={`${styles.widgetCard} ${className || ""}`}
-      bordered={false} // Отключаем дефолтный бордер антди, у нас свой в CSS
+      variant="borderless"
       {...props}
     >
       {children}

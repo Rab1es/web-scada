@@ -1,5 +1,5 @@
 import { Typography as BaseTypography } from "antd";
-import type { FC, PropsWithChildren } from "react";
+import type { CSSProperties, FC, PropsWithChildren } from "react";
 import styles from "./typography.module.css";
 
 interface TypographyProps {
@@ -15,6 +15,7 @@ interface TypographyProps {
   // Додав muted для сірих статусів
   color?: "default" | "danger" | "success" | "warning" | "primary" | "muted";
   className?: string;
+  style?: CSSProperties;
 }
 
 export const Typography: FC<PropsWithChildren<TypographyProps>> = ({
@@ -22,12 +23,13 @@ export const Typography: FC<PropsWithChildren<TypographyProps>> = ({
   color = "default",
   children,
   className = "",
+  style,
 }) => {
   const combinedClassName =
     `${styles.textBase} ${styles[variant]} ${styles[color]} ${className}`.trim();
 
   return (
-    <BaseTypography.Text className={combinedClassName}>
+    <BaseTypography.Text className={combinedClassName} style={style}>
       {children}
     </BaseTypography.Text>
   );
