@@ -22,6 +22,7 @@ const { Content } = Layout;
 const RemoteSensorPanel = React.lazy(() => import("monitoring/SensorPanel"));
 const MfeDashboard = React.lazy(() => import("monitoring/Dashboard"));
 const MfeUpsInfo = React.lazy(() => import("monitoring/UpsInfo"));
+const MfeAnalytics = React.lazy(() => import("monitoring/Analytics"));
 
 function App() {
   // @ts-ignore
@@ -50,7 +51,7 @@ function App() {
   } = sensorData || {};
 
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
 
   useEffect(() => {
@@ -191,42 +192,6 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    // <div>
-                    //   <div
-                    //     style={{
-                    //       display: "flex",
-                    //       gap: "5px",
-                    //       marginBottom: "10px",
-                    //     }}
-                    //   >
-                    //     <button onClick={() => handleTogglePump(true)}>
-                    //       Turn on pump
-                    //     </button>
-                    //     <button onClick={() => handleTogglePump(false)}>
-                    //       Turn of pump
-                    //     </button>
-                    //   </div>
-                    //   <div
-                    //     style={{
-                    //       display: "flex",
-                    //       gap: "5px",
-                    //       marginBottom: "10px",
-                    //     }}
-                    //   >
-                    //     <button onClick={() => handleToggleHeater(true)}>
-                    //       Turn on heater
-                    //     </button>
-                    //     <button onClick={() => handleToggleHeater(false)}>
-                    //       Turn of heater
-                    //     </button>
-                    //   </div>
-                    //   {/* <Suspense fallback={<span>Loading MF</span>}>
-                    //   <RemoteSensorPanel
-                    //     {...sensorData}
-                    //     isConnected={isConnected}
-                    //   />
-                    // </Suspense> */}
-                    // </div>
                     <ErrorBoundary>
                       <Suspense
                         fallback={
@@ -260,11 +225,23 @@ function App() {
                     </ErrorBoundary>
                   }
                 />
-                {/* <Route
-                path="/charts"
-                element={<h3>Тут буде завантажено МФ: Графіки</h3>}
-              />
-              <Route
+                <Route
+                  path="/charts"
+                  element={
+                    <ErrorBoundary>
+                      <Suspense
+                        fallback={
+                          <div style={{ textAlign: "center", padding: "50px" }}>
+                            <Spin size="large" />
+                          </div>
+                        }
+                      >
+                        <MfeAnalytics />
+                      </Suspense>
+                    </ErrorBoundary>
+                  }
+                />
+                {/*<Route
                 path="/logs"
                 element={<h3>Тут буде завантажено МФ: Журнал</h3>}
               /> */}

@@ -19,3 +19,10 @@ declare module "monitoring/UpsInfo" {
   const UpsInfo: ComponentType<UpsInfoProps>;
   export default UpsInfo;
 }
+
+declare module "monitoring/Analytics" {
+  import type { ComponentType } from "react";
+  import type { AnalyticsProps } from "@scada/shared-types";
+  const Analytics: ComponentType<AnalyticsProps>;
+  export default Analytics;
+}
