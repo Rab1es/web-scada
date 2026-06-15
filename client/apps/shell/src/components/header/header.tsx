@@ -59,7 +59,7 @@ export const AppHeader: FC<HeaderProps> = ({
       {/* Ліва частина: Заголовок */}
       <div>
         <Title level={4} style={{ margin: 0 }}>
-          SCADA Котельні
+          SCADA Boiler House
         </Title>
       </div>
 
@@ -76,7 +76,7 @@ export const AppHeader: FC<HeaderProps> = ({
             icon={<CheckCircleOutlined />}
             style={{ fontSize: "14px", padding: "4px 10px", margin: 0 }}
           >
-            Мережа 220В
+            220V Network
           </Tag>
         ) : (
           <Tag
@@ -85,14 +85,14 @@ export const AppHeader: FC<HeaderProps> = ({
             className={styles.pulsingUps} // Цей клас ми опишемо в CSS
             style={{ fontSize: "14px", padding: "4px 10px", margin: 0 }}
           >
-            Робота від ДБЖ
+            UPS powered
           </Tag>
         )}
 
         {/* Перемикач режимів Auto/Manual */}
         <Space>
           <Text type={isAutoMode ? "secondary" : "danger"} strong={!isAutoMode}>
-            РУЧН
+            MANUAL
           </Text>
           <Switch
             checked={isAutoMode}
@@ -100,7 +100,7 @@ export const AppHeader: FC<HeaderProps> = ({
             style={{ background: isAutoMode ? "#52c41a" : "#ff4d4f" }}
           />
           <Text type={isAutoMode ? "success" : "secondary"} strong={isAutoMode}>
-            АВТО
+            AUTO
           </Text>
         </Space>
 
