@@ -111,7 +111,7 @@ export const ControlPanel: FC<ControlPanelProps> = ({
           onApply={handleSetTemperatureSetpoint}
           unit="°C"
           isRange
-          disabled={isAutoMode || hasGridPower === false}
+          disabled={!isAutoMode || hasGridPower === false}
         />
       </div>
     </WidgetCard>
