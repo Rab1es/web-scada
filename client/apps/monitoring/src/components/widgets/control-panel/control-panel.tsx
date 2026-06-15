@@ -39,19 +39,15 @@ export const ControlPanel: FC<ControlPanelProps> = ({
     isAutoMode || (batteryLevel !== undefined && batteryLevel <= 10);
   return (
     <WidgetCard
-      title="Параметри керування"
+      title="Control parameters"
       className={styles.controllCardContainer}
     >
       {/* --- ВЕРХНІЙ ПОВЕРХ: Кнопки --- */}
       <div className={styles.section}>
-        <ScadaTypography variant="headerXs">
-          Ручне керування агрегатами
-        </ScadaTypography>
-
         <div className={styles.buttonsContainer}>
           {/* Пальник */}
           <div className={styles.buttonGroup}>
-            <ScadaTypography variant="label">Пальник</ScadaTypography>
+            <ScadaTypography variant="label">Burner</ScadaTypography>
             <div className={styles.buttonsRow}>
               <Button
                 type="primary"
@@ -60,23 +56,21 @@ export const ControlPanel: FC<ControlPanelProps> = ({
                 onClick={() => handleToggleHeater(true)}
                 className={styles.btn}
               >
-                Увімк.
+                Turn on
               </Button>
               <Button
                 disabled={isControlDisabled}
                 onClick={() => handleToggleHeater(false)}
                 className={styles.btn}
               >
-                Вимк.
+                Turn off
               </Button>
             </div>
           </div>
 
           {/* Насос */}
           <div className={styles.buttonGroup}>
-            <ScadaTypography variant="label">
-              Циркуляційний насос
-            </ScadaTypography>
+            <ScadaTypography variant="label">Circulation pump</ScadaTypography>
             <div className={styles.buttonsRow}>
               <Button
                 type="primary"
@@ -84,14 +78,14 @@ export const ControlPanel: FC<ControlPanelProps> = ({
                 onClick={() => handleTogglePump(true)}
                 className={styles.btn}
               >
-                Увімк.
+                Turn on
               </Button>
               <Button
                 disabled={isControlDisabled}
                 onClick={() => handleTogglePump(false)}
                 className={styles.btn}
               >
-                Вимк.
+                Turn off
               </Button>
             </div>
           </div>
@@ -104,7 +98,7 @@ export const ControlPanel: FC<ControlPanelProps> = ({
       {/* --- НИЖНІЙ ПОВЕРХ: Уставка (твій кастомний компонент) --- */}
       <div className={styles.section}>
         <Slider
-          title="Уставка температури теплоносія (Гістерезис)"
+          title="Heat transfer fluid temperature setpoint (Hysteresis)"
           min={0}
           max={90}
           currentValue={temperatureSetpoint}

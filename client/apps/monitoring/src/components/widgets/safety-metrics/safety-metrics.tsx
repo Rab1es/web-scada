@@ -28,10 +28,10 @@ export const SafetyMetrics: FC<SafetyMetricsProps> = ({
 
   const isGasAlarm = gasLevel > 0.5;
   return (
-    <WidgetCard title="Середовище та Безпека">
+    <WidgetCard title="Environment and Safety">
       {/* 1. Концентрация газа */}
       <MetricBlock
-        label="Концентрація CH4"
+        label="CH4 concentration"
         value={gasLevel?.toFixed(2)}
         unit="%"
         borderVariant={isGasAlarm ? "danger" : "default"}
@@ -45,7 +45,7 @@ export const SafetyMetrics: FC<SafetyMetricsProps> = ({
 
       {/* 2. Температура на улице */}
       <MetricBlock
-        label="Температура надворі (T_ext)"
+        label="Outside temperature"
         value={tempOutdoor?.toFixed(1)}
         unit="°C"
         borderVariant="success"
@@ -55,7 +55,7 @@ export const SafetyMetrics: FC<SafetyMetricsProps> = ({
 
       {/* 3. Температура в помещении + Полоска прогресса */}
       <MetricBlock
-        label="Температура в приміщенні"
+        label="Indoor temperature"
         value={displayIndoorTemp?.toFixed(1)}
         unit="°C"
         className={styles.borderPurple}

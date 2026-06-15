@@ -29,7 +29,7 @@ export const Dashboard: FC<DashboardProps> = ({
     <div className={styles.dashboardContainer}>
       <div style={{ marginBottom: "24px" }}>
         <ScadaTypography variant="header">
-          Оперативні дані котельні (Панель моніторингу)
+          Boiler operational data (Monitoring panel)
         </ScadaTypography>
       </div>
 

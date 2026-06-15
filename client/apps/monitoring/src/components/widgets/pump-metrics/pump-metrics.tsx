@@ -19,7 +19,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
   pressure,
 }) => {
   return (
-    <WidgetCard title="Мережа (Циркуляція)">
+    <WidgetCard title="Circulation">
       {/* --- ВЕРХНИЙ БЛОК: Статус и Кольцо мощности --- */}
       <div className={styles.pumpContainer}>
         {/* Строка статуса с иконкой */}
@@ -35,7 +35,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
             variant="status"
             color={pumpActive ? "primary" : "muted"}
           >
-            {pumpActive ? `Насос працює` : "Насос зупинено"}
+            {pumpActive ? `Pump active` : "Pump stopped"}
           </ScadaTypography>
         </div>
 
@@ -57,7 +57,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
                   {percent}%
                 </ScadaTypography>
                 {/* Используем наш маленький капс-шрифт для подписи */}
-                <ScadaTypography variant="headerXs">Потужність</ScadaTypography>
+                <ScadaTypography variant="headerXs">Power</ScadaTypography>
               </div>
             )}
           />
@@ -66,7 +66,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
 
       {/* --- НИЖНИЙ БЛОК: Давление --- */}
       <MetricBlock
-        label="Тиск у контурі"
+        label="Circuit pressure"
         value={pressure?.toFixed(1)}
         unit="Bar"
         borderVariant="success" /* Если нужно, можно менять на danger при падении давления */

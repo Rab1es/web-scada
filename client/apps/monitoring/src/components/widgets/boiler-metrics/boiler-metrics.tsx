@@ -20,10 +20,10 @@ export const BoilerMetrics: FC<BoilerMetricsProps> = ({
     ? styles.fireIconActive
     : styles.fireIconDefault;
   return (
-    <WidgetCard title="Котел (Генерація тепла)">
+    <WidgetCard title="Boiler">
       <MetricBlock
-        label="Стан пальника"
-        value={flameActive ? "Полум'я горить" : "Немає розпалу"}
+        label="Burner status"
+        value={flameActive ? "Flame burns" : "No heat"}
         borderVariant="default"
         valueColor={flameActive ? "warning" : "default"}
         valueVariant="status"
@@ -31,7 +31,7 @@ export const BoilerMetrics: FC<BoilerMetricsProps> = ({
       />
 
       <MetricBlock
-        label="Температура подачі (T_out)"
+        label="Supply temperature"
         value={tempSupply}
         unit="°C"
         borderVariant="danger"
@@ -39,7 +39,7 @@ export const BoilerMetrics: FC<BoilerMetricsProps> = ({
       />
 
       <MetricBlock
-        label="Температура зворотної (T_in)"
+        label="Return temperature"
         value={tempReturn}
         unit="°C"
         borderVariant="primary"
