@@ -31,26 +31,6 @@ function App() {
   const socketRef = useRef<WebSocket | null>(null);
 
   const {
-    tempSupply,
-    tempReturn,
-    tempOutdoor,
-    tempIndoor,
-    pressure,
-    batteryLevel,
-    gasLevel,
-    pumpActive,
-    heaterActive,
-    flameActive,
-    pumpSpeed,
-    // systemState,
-    hasGridPower,
-    isAutoMode,
-    isEmergencyStop,
-    temperatureSetpoint,
-    batteryTimeRemaining,
-  } = sensorData || {};
-
-  const {
     token: { borderRadiusLG },
   } = theme.useToken();
 
@@ -86,6 +66,27 @@ function App() {
   if (!isConnected || !sensorData) {
     return <Spin size="large" />;
   }
+
+  const {
+    tempSupply,
+    tempReturn,
+    tempOutdoor,
+    tempIndoor,
+    pressure,
+    batteryLevel,
+    gasLevel,
+    pumpActive,
+    heaterActive,
+    flameActive,
+    pumpSpeed,
+    // systemState,
+    hasGridPower,
+    isAutoMode,
+    isEmergencyStop,
+    temperatureSetpoint,
+    batteryTimeRemaining,
+    charts,
+  } = sensorData;
 
   const handleSendSocketMessage = ({ command, value }: SockectMessage) => {
     if (socketRef.current?.readyState === WebSocket.OPEN) {
@@ -236,7 +237,7 @@ function App() {
                           </div>
                         }
                       >
-                        <MfeAnalytics />
+                        <MfeAnalytics charts={charts} />
                       </Suspense>
                     </ErrorBoundary>
                   }

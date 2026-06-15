@@ -1,27 +1,46 @@
 export interface HardwareData {
-  tempSupply?: number; // Температура подачи (бывшая общая temperature)
-  tempReturn?: number; // Температура обратки
-  tempOutdoor?: number;
-  tempIndoor?: number;
-  pressure?: number;
-  batteryLevel?: number;
-  gasLevel?: number;
-  pumpActive?: boolean;
-  heaterActive?: boolean;
-  flameActive?: boolean;
-  pumpSpeed?: number;
+  tempSupply: number;
+  tempReturn: number;
+  tempOutdoor: number;
+  tempIndoor: number;
+  pressure: number;
+  batteryLevel: number;
+  gasLevel: number;
+  pumpActive: boolean;
+  heaterActive: boolean;
+  flameActive: boolean;
+  pumpSpeed: number;
 }
 
 export interface SoftwareData {
-  systemState?: string;
-  hasGridPower?: boolean;
-  isAutoMode?: boolean;
-  isEmergencyStop?: boolean;
-  temperatureSetpoint?: [number, number];
-  batteryTimeRemaining?: number;
+  systemState: string;
+  hasGridPower: boolean;
+  isAutoMode: boolean;
+  isEmergencyStop: boolean;
+  temperatureSetpoint: [number, number];
+  batteryTimeRemaining: number;
 }
 
-export interface ScadaPayload extends HardwareData, SoftwareData {}
+export interface BaseChartPoint {
+  time: string;
+  timestamp: number;
+}
+
+export type TemperatureChartPoint = BaseChartPoint &
+  Pick<HardwareData, "tempSupply" | "tempReturn"> &
+  Pick<SoftwareData, "temperatureSetpoint">;
+
+export type UpsDataPoint = BaseChartPoint & Pick<HardwareData, "batteryLevel">;
+
+// Объединяем их в один объект, который прилетит с бэкенда
+export interface ScadaCharts {
+  temperature: TemperatureChartPoint[];
+  battery: UpsDataPoint[];
+}
+
+export interface ScadaPayload extends HardwareData, SoftwareData {
+  charts?: ScadaCharts;
+}
 
 export interface SensorPanelProps extends ScadaPayload {
   isConnected: boolean;
@@ -41,6 +60,8 @@ export interface UpsInfoProps
   extends
     Pick<HardwareData, "batteryLevel">,
     Pick<SoftwareData, "batteryTimeRemaining" | "hasGridPower"> {}
+
+export type AnalyticsProps = Pick<ScadaPayload, "charts">;
 
 export const SocketEvent = {
   CONNECTION: "connection",
