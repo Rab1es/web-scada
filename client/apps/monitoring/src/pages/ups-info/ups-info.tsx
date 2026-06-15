@@ -18,11 +18,11 @@ export const UpsInfo: FC<UpsInfoProps> = ({
   };
 
   const formatTime = (totalMinutes?: number) => {
-    if (totalMinutes == null) return "Обчислення...";
+    if (totalMinutes == null) return "Calculation...";
     const hours = Math.floor(totalMinutes / 60);
     const minutes = Math.floor(totalMinutes % 60);
-    if (hours > 0) return `${hours} год ${minutes} хв`;
-    return `${minutes} хв`;
+    if (hours > 0) return `${hours} h ${minutes} min`;
+    return `${minutes} min`;
   };
 
   const calculateChargeTime = (soc: number) => {
@@ -32,10 +32,12 @@ export const UpsInfo: FC<UpsInfoProps> = ({
     return Math.floor(secondsLeft / 60); // в минутах
   };
 
+  const isBatteryFull = batteryLevel === 100;
+
   return (
     // Обмежуємо ширину, щоб віджет не розтягувався на весь екран як сосиска
     <WidgetCard
-      title="Резервне живлення (ДБЖ)"
+      title="Uninterruptible power supply"
       style={{ maxWidth: 450, margin: "0 auto" }}
     >
       <div
@@ -59,25 +61,27 @@ export const UpsInfo: FC<UpsInfoProps> = ({
             <>
               <ThunderboltOutlined style={{ color: "#52c41a", fontSize: 24 }} />
               <ScadaTypography variant="status" color="success">
-                Мережа 220В (Заряджається)
+                {isBatteryFull
+                  ? "Сharging complete"
+                  : "The battery is charging"}
               </ScadaTypography>
             </>
           ) : (
             <>
               <DisconnectOutlined style={{ color: "#faad14", fontSize: 24 }} />
               <ScadaTypography variant="status" color="warning">
-                Автономна робота (Розряд)
+                Battery powered
               </ScadaTypography>
             </>
           )}
-          {hasGridPower && (
+          {hasGridPower && !isBatteryFull && (
             <div style={{ marginTop: "24px", textAlign: "center" }}>
               <ScadaTypography variant="label">
-                Час до повного заряду:
+                Time to full charge:
               </ScadaTypography>
               <div style={{ marginTop: "4px" }}>
                 <ScadaTypography variant="value" style={{ color: "#52c41a" }}>
-                  {calculateChargeTime(batteryLevel)} хв
+                  {formatTime(calculateChargeTime(batteryLevel))}
                 </ScadaTypography>
               </div>
             </div>
@@ -105,7 +109,9 @@ export const UpsInfo: FC<UpsInfoProps> = ({
               >
                 {percent}%
               </ScadaTypography>
-              <ScadaTypography variant="label">Заряд АКБ</ScadaTypography>
+              <ScadaTypography variant="label">
+                Battery Charge Level
+              </ScadaTypography>
             </div>
           )}
         />
@@ -124,7 +130,7 @@ export const UpsInfo: FC<UpsInfoProps> = ({
             }}
           >
             <ScadaTypography variant="label">
-              Прогноз автономної роботи
+              Estimated remaining time of work
             </ScadaTypography>
             <div style={{ marginTop: "8px" }}>
               <ScadaTypography
