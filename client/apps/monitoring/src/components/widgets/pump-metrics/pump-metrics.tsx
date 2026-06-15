@@ -18,6 +18,9 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
   pumpSpeed,
   pressure,
 }) => {
+  const MAX_SPEED = 50;
+  const calculatedPercent = (pumpSpeed / MAX_SPEED) * 100;
+
   return (
     <WidgetCard title="Circulation">
       {/* --- ВЕРХНИЙ БЛОК: Статус и Кольцо мощности --- */}
@@ -43,21 +46,21 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
         <div className={styles.progressWrapper}>
           <Progress
             type="dashboard"
-            percent={pumpSpeed}
+            percent={calculatedPercent}
             status={pumpActive ? "normal" : "exception"}
             strokeColor={
               pumpActive ? "var(--color-primary, #1890ff)" : "#303030"
             }
-            format={(percent) => (
+            format={() => (
               <div className={styles.progressText}>
                 <ScadaTypography
                   variant="value"
                   color={pumpActive ? "default" : "muted"}
                 >
-                  {percent}%
+                  {pumpSpeed} hz
                 </ScadaTypography>
                 {/* Используем наш маленький капс-шрифт для подписи */}
-                <ScadaTypography variant="headerXs">Power</ScadaTypography>
+                <ScadaTypography variant="headerXs">Frequency</ScadaTypography>
               </div>
             )}
           />
