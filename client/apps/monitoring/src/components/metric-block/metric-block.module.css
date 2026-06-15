@@ -10,6 +10,8 @@
   ); /* Робимо відчутно темніше (було 0.03 білого) */
   border-radius: 6px;
   margin-bottom: 12px;
+  height: 100%;
+  justify-content: space-around;
 }
 
 .metricBlock:last-child {
