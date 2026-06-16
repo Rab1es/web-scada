@@ -14,6 +14,7 @@ export default defineConfig({
         "./Dashboard": "./src/pages/dashboard/index.ts",
         "./UpsInfo": "./src/pages/ups-info/index.ts",
         "./Analytics": "./src/pages/analytics/index.ts",
+        "./EventLogs": "./src/pages/event-logs/index.ts",
       },
       shared: ["react", "react-dom", "antd", "recharts"],
     }),

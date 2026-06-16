@@ -26,3 +26,10 @@ declare module "monitoring/Analytics" {
   const Analytics: ComponentType<AnalyticsProps>;
   export default Analytics;
 }
+
+declare module "monitoring/EventLogs" {
+  import type { ComponentType } from "react";
+  import type { EventLogsProps } from "@scada/shared-types";
+  const EventLogs: ComponentType<EventLogsProps>;
+  export default EventLogs;
+}

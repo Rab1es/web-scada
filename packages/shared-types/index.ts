@@ -40,6 +40,7 @@ export interface ScadaCharts {
 
 export interface ScadaPayload extends HardwareData, SoftwareData {
   charts?: ScadaCharts;
+  logs?: ScadaLogEntry[];
 }
 
 export interface SensorPanelProps extends ScadaPayload {
@@ -63,6 +64,8 @@ export interface UpsInfoProps
 
 export type AnalyticsProps = Pick<ScadaPayload, "charts">;
 
+export type EventLogsProps = Pick<ScadaPayload, "logs">;
+
 export const SocketEvent = {
   CONNECTION: "connection",
   DISCONNECT: "disconnect",
@@ -79,4 +82,17 @@ export type SocketMessageValue = number | string | boolean | [number, number];
 export interface SockectMessage {
   command: SocketCommand;
   value: SocketMessageValue;
+}
+
+export type LogCategory = "info" | "warning" | "critical" | "command";
+export type LogInitiator = "Operator" | "Automation";
+
+export interface ScadaLogEntry {
+  id: string;
+  timestamp: number; // Для точного сортування масиву на фронті
+  time: string; // "14:05:22"
+  date: string; // "15.06.2026"
+  category: LogCategory;
+  initiator: LogInitiator;
+  message: string;
 }

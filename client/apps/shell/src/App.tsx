@@ -23,6 +23,7 @@ const RemoteSensorPanel = React.lazy(() => import("monitoring/SensorPanel"));
 const MfeDashboard = React.lazy(() => import("monitoring/Dashboard"));
 const MfeUpsInfo = React.lazy(() => import("monitoring/UpsInfo"));
 const MfeAnalytics = React.lazy(() => import("monitoring/Analytics"));
+const MfeEventLogs = React.lazy(() => import("monitoring/EventLogs"));
 
 function App() {
   // @ts-ignore
@@ -86,6 +87,7 @@ function App() {
     temperatureSetpoint,
     batteryTimeRemaining,
     charts,
+    logs,
   } = sensorData;
 
   const handleSendSocketMessage = ({ command, value }: SockectMessage) => {
@@ -167,6 +169,24 @@ function App() {
           Menu: {
             darkItemBg: "#1e222d", // Чтобы фон меню совпадал с сайдбаром
           },
+          Table: {
+            // Фон шапки таблицы (ставь HEX цвет своего --bg-card, судя по всему это #1e222d или #141414)
+            headerBg: "#1e222d",
+
+            // Фон самих ячеек тела таблицы
+            colorBgContainer: "#1e222d",
+
+            // Цвет бордеров таблицы (твой --border-base)
+            borderColor: "#303030",
+
+            // Цвет строки при наведении (hover), чтобы не было белой вспышки
+            rowHoverBg: "rgba(255, 255, 255, 0.04)",
+
+            // Цвет текста в шапке (если нужен чуть тусклее или ярче)
+            headerColor: "rgba(255, 255, 255, 0.85)",
+
+            fontSize: 18,
+          },
         },
       }}
     >
@@ -242,10 +262,22 @@ function App() {
                     </ErrorBoundary>
                   }
                 />
-                {/*<Route
-                path="/logs"
-                element={<h3>Тут буде завантажено МФ: Журнал</h3>}
-              /> */}
+                <Route
+                  path="/logs"
+                  element={
+                    <ErrorBoundary>
+                      <Suspense
+                        fallback={
+                          <div style={{ textAlign: "center", padding: "50px" }}>
+                            <Spin size="large" />
+                          </div>
+                        }
+                      >
+                        <MfeEventLogs logs={logs} />
+                      </Suspense>
+                    </ErrorBoundary>
+                  }
+                />
               </Routes>
             </Content>
           </Layout>
