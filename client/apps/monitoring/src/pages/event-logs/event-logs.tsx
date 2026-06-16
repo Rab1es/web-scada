@@ -45,7 +45,13 @@ export const EventLogs: React.FC<EventLogsProps> = ({ logs }) => {
       render: (category: LogCategory) => (
         <Tag
           color={categoryColors[category]}
-          style={{ textTransform: "uppercase" }}
+          style={{
+            fontSize: "14px",
+            padding: "4px 12px",
+            width: "100px",
+            textAlign: "center",
+            textTransform: "uppercase",
+          }}
         >
           {category}
         </Tag>
@@ -67,7 +73,20 @@ export const EventLogs: React.FC<EventLogsProps> = ({ logs }) => {
       render: (initiator: LogInitiator) => {
         // Розділяємо візуально дії людини та машини
         const color = initiator === "Operator" ? "geekblue" : "purple";
-        return <Tag color={color}>{initiator}</Tag>;
+        return (
+          <Tag
+            color={color}
+            style={{
+              fontSize: "14px",
+              padding: "4px 12px",
+              width: "120px",
+              textAlign: "center",
+              textTransform: "uppercase",
+            }}
+          >
+            {initiator}
+          </Tag>
+        );
       },
       filters: [
         { text: "Operator", value: "Operator" },
@@ -85,6 +104,7 @@ export const EventLogs: React.FC<EventLogsProps> = ({ logs }) => {
         <Text
           type={record.category === "critical" ? "danger" : undefined}
           strong={record.category === "critical"}
+          style={{ fontSize: "18px" }}
         >
           {text}
         </Text>

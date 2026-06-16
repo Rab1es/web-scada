@@ -118,6 +118,7 @@ function App() {
     pumpSpeed,
     temperatureSetpoint,
     hasGridPower,
+    isEmergencyStop,
     sendCommand: handleSendSocketMessage,
   };
 
