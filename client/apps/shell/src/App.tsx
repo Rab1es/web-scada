@@ -29,6 +29,7 @@ function App() {
   // @ts-ignore
   const [isConnected, setIsConnected] = useState(false);
   const [sensorData, setSensorData] = useState<ScadaPayload | null>(null);
+  const [collapsed, setCollapsed] = useState(false);
   const socketRef = useRef<WebSocket | null>(null);
 
   const {
@@ -100,6 +101,8 @@ function App() {
     isEmergencyStop,
     hasGridPower,
     isAutoMode,
+    collapsed,
+    setCollapsed,
     sendCommand: handleSendSocketMessage,
   };
 
@@ -122,33 +125,6 @@ function App() {
     sendCommand: handleSendSocketMessage,
   };
 
-  // @ts-ignore
-  const handleTogglePump = (value: boolean) => {
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      const commandMessage: SockectMessage = {
-        command: SocketEvent.SET_PUMP,
-        value,
-      };
-
-      handleSendSocketMessage(commandMessage);
-    } else {
-      console.warn("No socket connection");
-    }
-  };
-
-  // @ts-ignore
-  const handleToggleHeater = (value: boolean) => {
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      const commandMessage: SockectMessage = {
-        command: SocketEvent.SET_HEATER,
-        value,
-      };
-
-      handleSendSocketMessage(commandMessage);
-    } else {
-      console.warn("No socket connection");
-    }
-  };
   return (
     <ConfigProvider
       theme={{
@@ -203,7 +179,7 @@ function App() {
         {/* Головний контейнер на весь екран */}
         <Layout style={{ height: "100vh", overflow: "hidden" }}>
           {/* Наш боковий Sider */}
-          <Sidebar />
+          <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
           <Layout>
             <AppHeader {...headerProps} />

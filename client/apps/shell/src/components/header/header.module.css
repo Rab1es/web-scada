@@ -19,3 +19,144 @@
 .header {
   background-color: var(--bg-header);
 }
+
+/* Десктопні стилі */
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  height: 80px;
+}
+
+.title {
+  margin: 0 !important;
+  letter-spacing: 0.5px;
+}
+
+.controlsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.clock {
+  font-size: 18px;
+  font-family: monospace;
+  letter-spacing: 1px;
+}
+
+.powerTag {
+  font-size: 15px;
+  padding: 6px 14px;
+  margin: 0;
+  border: none;
+}
+
+.modeToggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.modeText {
+  font-size: 15px;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+.resetButton {
+  background-color: #52c41a;
+  height: 48px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.estopButton {
+  height: 48px;
+  padding: 0 28px;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Кастомні стилі для попапу E-STOP */
+.estopPopupTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff4d4f;
+  margin-bottom: 8px;
+}
+
+.estopPopupDesc {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mobileMenuBtn {
+  display: none; /* Ховаємо на десктопі */
+}
+
+/* ========================================= */
+/* МОБІЛЬНА АДАПТАЦІЯ (Екрани менше 768px)   */
+/* ========================================= */
+@media (max-width: 768px) {
+  .headerContainer {
+    padding: 0 12px;
+  }
+
+  /* Ховаємо заголовок та годинник */
+  .titleWrapper,
+  .clock {
+    display: none;
+  }
+
+  /* Розтягуємо блок контролів на всю ширину і рівномірно розподіляємо */
+  .controlsWrapper {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  /* Прибираємо зовнішній відступ у кнопок */
+  .actionButtons {
+    margin-left: 0;
+    gap: 8px;
+  }
+
+  /* Робимо теги і кнопки трохи компактнішими */
+  .powerTag {
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+
+  /* Ховаємо текст MANUAL/AUTO, залишаємо тільки сам тумблер */
+  .modeText {
+    display: none;
+  }
+
+  .modeToggle {
+    gap: 8px;
+  }
+
+  .estopButton {
+    height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .resetButton {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .mobileMenuBtn {
+    display: block; /* Показуємо на мобілці */
+    margin-right: 12px;
+  }
+}

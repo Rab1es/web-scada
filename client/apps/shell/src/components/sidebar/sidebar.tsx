@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Layout, Menu, Button } from "antd";
+import { useState, useEffect } from "react";
+import { Layout, Menu, Button, Drawer, Grid } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   DashboardOutlined,
@@ -11,12 +11,20 @@ import {
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
+const { useBreakpoint } = Grid;
 
-export const Sidebar = () => {
-  // Стейт для керування згортанням
-  const [collapsed, setCollapsed] = useState(false);
+export const Sidebar = ({
+  collapsed,
+  setCollapsed,
+}: {
+  collapsed: boolean;
+  setCollapsed: (state: boolean) => void;
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const screens = useBreakpoint();
+  const isMobile = screens.md === false;
 
   const menuItems = [
     { key: "/", icon: <DashboardOutlined />, label: "Dashboard" },
@@ -25,10 +33,48 @@ export const Sidebar = () => {
     { key: "/logs", icon: <UnorderedListOutlined />, label: "Event Log" },
   ];
 
+  // Спільний контент меню для обох варіантів (Desktop/Mobile)
+  const menuContent = (
+    <Menu
+      theme="dark"
+      mode="inline"
+      selectedKeys={[location.pathname]}
+      items={menuItems}
+      onClick={({ key }) => {
+        navigate(key);
+        // Якщо ми на мобільному екрані - автоматично закриваємо шторку після переходу
+        if (isMobile) {
+          setCollapsed(true);
+        }
+      }}
+    />
+  );
+
+  // === МОБІЛЬНИЙ ВІДМАЛЬОВУВАЧ (Шторка) ===
+  if (isMobile) {
+    return (
+      <Drawer
+        title={
+          <span style={{ color: "rgba(255, 255, 255, 0.85)" }}>SCADA Menu</span>
+        }
+        placement="left"
+        onClose={() => setCollapsed(true)}
+        // Drawer відкритий, коли collapsed === false
+        open={!collapsed}
+        width={250}
+        styles={{
+          header: { background: "#141414", borderBottom: "1px solid #303030" },
+          body: { background: "#001529", padding: 0 },
+        }}
+      >
+        {menuContent}
+      </Drawer>
+    );
+  }
+
+  // === ДЕСКТОПНИЙ ВІДМАЛЬОВУВАЧ (Бокова панель) ===
   return (
-    // Вимикаємо стандартний trigger і передаємо наш state
     <Sider trigger={null} collapsible collapsed={collapsed} theme="dark">
-      {/* Наш кастомний блок з кнопкою */}
       <div
         style={{
           padding: "16px",
@@ -50,13 +96,7 @@ export const Sidebar = () => {
         />
       </div>
 
-      <Menu
-        theme="dark"
-        mode="inline"
-        selectedKeys={[location.pathname]}
-        items={menuItems}
-        onClick={({ key }) => navigate(key)}
-      />
+      {menuContent}
     </Sider>
   );
 };

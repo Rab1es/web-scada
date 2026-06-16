@@ -13,6 +13,7 @@ import {
   PoweroffOutlined,
   CheckCircleOutlined,
   SafetyCertificateOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
 import type { HeaderProps } from "./types";
 import { SocketEvent, type SockectMessage } from "@scada/shared-types";
@@ -25,6 +26,8 @@ export const AppHeader: FC<HeaderProps> = ({
   hasGridPower,
   isAutoMode,
   isEmergencyStop,
+  collapsed,
+  setCollapsed,
   sendCommand,
 }) => {
   // Стейт для годинника
@@ -46,49 +49,33 @@ export const AppHeader: FC<HeaderProps> = ({
   };
 
   return (
-    <Header
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "0 24px",
-        height: "80px", // Збільшуємо висоту хедера (дефолт 64px)
-      }}
-    >
+    <Header className={styles.headerContainer}>
+      <Button
+        type="text"
+        icon={<MenuOutlined style={{ fontSize: "20px", color: "#fff" }} />}
+        onClick={() => setCollapsed(!collapsed)}
+        className={styles.mobileMenuBtn} // В CSS зробиш display: none для десктопу і display: block для мобілок
+      />
       {/* Ліва частина: Заголовок */}
-      <div>
-        {/* Збільшили рівень заголовка до 3, щоб він відповідав масштабу */}
-        <Title level={3} style={{ margin: 0, letterSpacing: "0.5px" }}>
+      <div className={styles.titleWrapper}>
+        <Title level={3} className={styles.title}>
           SCADA Boiler House
         </Title>
       </div>
 
       {/* Права частина: Елементи керування */}
-      {/* Збільшили загальний відступ між логічними блоками (size={32}) */}
-      <Space size={32} align="center">
-        {/* Годинник: збільшили шрифт і додали міжлітерний інтервал */}
-        <Text
-          strong
-          style={{
-            fontSize: "18px",
-            fontFamily: "monospace",
-            letterSpacing: "1px",
-          }}
-        >
+      <div className={styles.controlsWrapper}>
+        {/* Годинник */}
+        <Text strong className={styles.clock}>
           {time.toLocaleTimeString("uk-UA")}
         </Text>
 
-        {/* Блок живлення: збільшили теги */}
+        {/* Блок живлення */}
         {hasGridPower ? (
           <Tag
             color="success"
             icon={<CheckCircleOutlined />}
-            style={{
-              fontSize: "15px",
-              padding: "6px 14px",
-              margin: 0,
-              border: "none",
-            }}
+            className={styles.powerTag}
           >
             220V Network
           </Tag>
@@ -96,84 +83,64 @@ export const AppHeader: FC<HeaderProps> = ({
           <Tag
             color="warning"
             icon={<ThunderboltOutlined />}
-            className={styles.pulsingUps}
-            style={{
-              fontSize: "15px",
-              padding: "6px 14px",
-              margin: 0,
-              border: "none",
-            }}
+            className={`${styles.powerTag} ${styles.pulsingUps || ""}`}
           >
             UPS powered
           </Tag>
         )}
 
-        {/* Перемикач режимів: додали розмір тексту */}
-        <Space size="middle">
+        {/* Перемикач режимів */}
+        <div className={styles.modeToggle}>
           <Text
             type={isAutoMode ? "secondary" : "danger"}
             strong={!isAutoMode}
-            style={{ fontSize: "15px" }}
+            className={styles.modeText}
           >
             MANUAL
           </Text>
           <Switch
             checked={isAutoMode}
             onChange={handleToggleSystemMode}
+            // checkedChildren="AUTO"
+            // unCheckedChildren="MANUAL"
             style={{
               background: isAutoMode ? "#52c41a" : "#ff4d4f",
               transform: "scale(1.2)",
-            }} // Трохи збільшили сам світчер
+            }}
           />
           <Text
             type={isAutoMode ? "success" : "secondary"}
             strong={isAutoMode}
-            style={{ fontSize: "15px" }}
+            className={styles.modeText}
           >
             AUTO
           </Text>
-        </Space>
+        </div>
 
-        {/* Блок кнопок аварії: відділили від решти інтерфейсу */}
-        <Space size="middle" style={{ marginLeft: "16px" }}>
-          {/* Кнопка деблокування */}
+        {/* Блок кнопок аварії */}
+        <div className={styles.actionButtons}>
           {isEmergencyStop && (
             <Button
               type="primary"
-              style={{
-                backgroundColor: "#52c41a",
-                height: "48px",
-                fontWeight: "bold",
-                fontSize: "15px",
-              }}
+              className={styles.resetButton}
               icon={<SafetyCertificateOutlined />}
               onClick={() =>
                 sendCommand({ command: "emergency-stop", value: false })
               }
             >
-              RESETTING THE ALARM
+              RESET ALARM
             </Button>
           )}
 
           {/* Основна кнопка E-STOP */}
           <Popconfirm
-            // Передаем JSX вместо обычной строки, чтобы накрутить стили
             title={
-              <div
-                style={{
-                  fontSize: "18px",
-                  fontWeight: "bold",
-                  color: "#ff4d4f",
-                  marginBottom: "8px",
-                }}
-              >
+              <div className={styles.estopPopupTitle}>
                 WARNING! EMERGENCY STOP!
               </div>
             }
             description={
-              <div
-                style={{ fontSize: "16px", color: "rgba(255, 255, 255, 0.85)" }}
-              >
+              <div className={styles.estopPopupDesc}>
                 Are you sure you want to completely shut down the boiler house?
               </div>
             }
@@ -182,7 +149,6 @@ export const AppHeader: FC<HeaderProps> = ({
             }
             okText="Shut Down"
             cancelText="Cancel"
-            // Увеличиваем кнопки внутри самого попапа
             okButtonProps={{
               danger: true,
               size: "large",
@@ -190,13 +156,12 @@ export const AppHeader: FC<HeaderProps> = ({
             }}
             cancelButtonProps={{ size: "large" }}
             disabled={isEmergencyStop}
-            placement="bottomRight" // Явно указываем позиционирование, чтобы он красиво выпадал из-под кнопки
-            // Увеличиваем саму подложку попапа (padding и ширину)
+            placement="bottomRight"
             overlayInnerStyle={{
               width: "400px",
               padding: "20px 24px",
-              backgroundColor: "#1e222d", // Подтягиваем цвет фона под твою тему
-              border: "1px solid #ff4d4f", // Добавляем красную рамку для привлечения внимания
+              backgroundColor: "#1e222d",
+              border: "1px solid #ff4d4f",
             }}
           >
             <Button
@@ -204,19 +169,13 @@ export const AppHeader: FC<HeaderProps> = ({
               danger
               icon={<PoweroffOutlined />}
               disabled={isEmergencyStop}
-              style={{
-                height: "48px",
-                padding: "0 28px",
-                fontSize: "16px",
-                fontWeight: "bold",
-                letterSpacing: "1px",
-              }}
+              className={styles.estopButton}
             >
               E-STOP
             </Button>
           </Popconfirm>
-        </Space>
-      </Space>
+        </div>
+      </div>
     </Header>
   );
 };

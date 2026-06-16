@@ -48,7 +48,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
         <div className={styles.progressWrapper}>
           <Progress
             type="dashboard"
-            percent={calculatedPercent}
+            percent={pumpActive ? calculatedPercent : 0}
             status={pumpActive ? "normal" : "exception"}
             strokeColor={
               pumpActive ? "var(--color-primary, #1890ff)" : "#303030"
@@ -59,7 +59,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
                   variant="value"
                   color={pumpActive ? "default" : "muted"}
                 >
-                  {pumpSpeed} hz
+                  {pumpActive ? pumpSpeed : 0} hz
                 </ScadaTypography>
                 {/* Используем наш маленький капс-шрифт для подписи */}
                 <ScadaTypography variant="label">Frequency</ScadaTypography>
