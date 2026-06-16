@@ -59,10 +59,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export const UpsChart: FC<UpsChartProps> = ({ data }) => {
   if (!data || data.length < 2) {
     return (
-      <WidgetCard
-        title="Крива деградації заряду (SOC)"
-        style={{ height: "350px" }}
-      >
+      <WidgetCard title="Charge degradation" style={{ height: "350px" }}>
         <div
           style={{
             display: "flex",
@@ -79,10 +76,7 @@ export const UpsChart: FC<UpsChartProps> = ({ data }) => {
   }
 
   return (
-    <WidgetCard
-      title="Крива деградації заряду (SOC)"
-      style={{ height: "350px" }}
-    >
+    <WidgetCard title="Charge degradation" style={{ height: "350px" }}>
       <div style={{ flex: 1, width: "100%", height: "100%", minHeight: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart // Змінили тип графіка

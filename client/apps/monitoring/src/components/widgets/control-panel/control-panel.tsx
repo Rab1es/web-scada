@@ -15,6 +15,7 @@ interface ControlPanelProps {
   hasGridPower: any;
   heaterActive: any;
   pumpActive: any;
+  isEmergencyStop: boolean;
 }
 
 export const ControlPanel: FC<ControlPanelProps> = ({
@@ -25,6 +26,7 @@ export const ControlPanel: FC<ControlPanelProps> = ({
   hasGridPower,
   pumpActive,
   heaterActive,
+  isEmergencyStop,
 }) => {
   const handleToggleHeater = (value: boolean) => {
     sendCommand({ command: SocketEvent.SET_HEATER, value });
@@ -40,7 +42,9 @@ export const ControlPanel: FC<ControlPanelProps> = ({
 
   // Єдина логіка блокування ручного керування (АВТО режим АБО критичний розряд батареї)
   const isControlDisabled =
-    isAutoMode || (batteryLevel !== undefined && batteryLevel <= 10);
+    isAutoMode ||
+    (batteryLevel !== undefined && batteryLevel <= 10) ||
+    isEmergencyStop;
   return (
     <WidgetCard
       title="Control parameters"

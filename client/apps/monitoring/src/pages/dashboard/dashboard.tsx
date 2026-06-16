@@ -22,6 +22,7 @@ export const Dashboard: FC<DashboardProps> = ({
   batteryLevel,
   hasGridPower,
   heaterActive,
+  isEmergencyStop,
   sendCommand,
 }) => {
   return (
@@ -37,6 +38,7 @@ export const Dashboard: FC<DashboardProps> = ({
             hasGridPower={hasGridPower}
             heaterActive={heaterActive}
             pumpActive={pumpActive}
+            isEmergencyStop={isEmergencyStop}
           />
         </Col>
 

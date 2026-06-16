@@ -55,7 +55,10 @@ export interface DashboardProps
   extends
     WithSocketProps,
     HardwareData,
-    Pick<SoftwareData, "isAutoMode" | "temperatureSetpoint" | "hasGridPower"> {}
+    Pick<
+      SoftwareData,
+      "isAutoMode" | "temperatureSetpoint" | "hasGridPower" | "isEmergencyStop"
+    > {}
 
 export interface UpsInfoProps
   extends

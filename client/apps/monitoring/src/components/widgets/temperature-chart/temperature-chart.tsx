@@ -54,7 +54,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
                 fontWeight: 500,
               }}
             >
-              Уставка (Гістерезис):
+              Hysteresis:
             </span>
             <div>
               <ScadaTypography
@@ -114,10 +114,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export const TemperatureChart: FC<TemperatureChartProps> = ({ data }) => {
   if (!data || data.length < 2) {
     return (
-      <WidgetCard
-        title="Динаміка температур (Тренди)"
-        style={{ height: "450px" }}
-      >
+      <WidgetCard title="Temperature dynamics" style={{ height: "450px" }}>
         <div
           style={{
             display: "flex",
@@ -143,10 +140,7 @@ export const TemperatureChart: FC<TemperatureChartProps> = ({ data }) => {
   }));
 
   return (
-    <WidgetCard
-      title="Динаміка температур (Тренди)"
-      style={{ height: "450px" }}
-    >
+    <WidgetCard title="Temperature dynamics" style={{ height: "450px" }}>
       <div style={{ flex: 1, width: "100%", height: "100%", minHeight: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -192,7 +186,8 @@ export const TemperatureChart: FC<TemperatureChartProps> = ({ data }) => {
             <Line
               type="stepAfter"
               dataKey="setpoint_max"
-              name="Уставка Макс"
+              name="Setpoint max"
+              fontSize={16}
               stroke="#faad14"
               strokeWidth={1}
               strokeDasharray="5 5"
@@ -202,7 +197,8 @@ export const TemperatureChart: FC<TemperatureChartProps> = ({ data }) => {
             <Line
               type="stepAfter"
               dataKey="setpoint_min"
-              name="Уставка Мін"
+              name="Setpoint min"
+              fontSize={16}
               stroke="#b37feb"
               strokeWidth={1}
               strokeDasharray="5 5"
@@ -213,7 +209,8 @@ export const TemperatureChart: FC<TemperatureChartProps> = ({ data }) => {
             <Line
               type="monotone"
               dataKey="tempReturn"
-              name="T_in (Зворотна)"
+              name="Return"
+              fontSize={16}
               stroke="#1890ff"
               strokeWidth={3}
               dot={{ r: 3, fill: "#131722", strokeWidth: 2 }}
@@ -223,7 +220,8 @@ export const TemperatureChart: FC<TemperatureChartProps> = ({ data }) => {
             <Line
               type="monotone"
               dataKey="tempSupply"
-              name="T_out (Подача)"
+              name="Supply"
+              fontSize={16}
               stroke="#cf1322"
               strokeWidth={3}
               dot={{ r: 3, fill: "#131722", strokeWidth: 2 }}

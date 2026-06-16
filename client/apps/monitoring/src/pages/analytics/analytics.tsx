@@ -5,7 +5,7 @@ import { UpsChart } from "../../components/widgets/ups-chart";
 
 export const Analytics: FC<AnalyticsProps> = ({ charts }) => {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <TemperatureChart data={charts?.temperature || []} />
       <UpsChart data={charts?.battery || []} />
     </div>
