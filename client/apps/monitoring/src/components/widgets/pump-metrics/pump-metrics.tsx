@@ -19,6 +19,8 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
   pressure,
 }) => {
   const MAX_SPEED = 50;
+  const PRESSURE_MAX = 2.5;
+  const PRESSURE_MIN = 0;
   const calculatedPercent = (pumpSpeed / MAX_SPEED) * 100;
 
   return (
@@ -72,7 +74,11 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
         label="Circuit pressure"
         value={pressure?.toFixed(1)}
         unit="Bar"
-        borderVariant="success" /* Если нужно, можно менять на danger при падении давления */
+        borderVariant={
+          pressure >= PRESSURE_MAX || pressure <= PRESSURE_MIN
+            ? "danger"
+            : "default"
+        } /* Если нужно, можно менять на danger при падении давления */
         valueColor="default"
       />
     </WidgetCard>

@@ -59,7 +59,10 @@ export interface DashboardProps
 
 export interface UpsInfoProps
   extends
-    Pick<HardwareData, "batteryLevel">,
+    Pick<
+      HardwareData,
+      "batteryLevel" | "pumpActive" | "pumpSpeed" | "heaterActive"
+    >,
     Pick<SoftwareData, "batteryTimeRemaining" | "hasGridPower"> {}
 
 export type AnalyticsProps = Pick<ScadaPayload, "charts">;

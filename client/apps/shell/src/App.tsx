@@ -167,7 +167,15 @@ function App() {
             bodyBg: "#131722",
           },
           Menu: {
-            darkItemBg: "#1e222d", // Чтобы фон меню совпадал с сайдбаром
+            darkItemBg: "#1e222d", // Твой фон
+            // --- НОВЫЕ ПАРАМЕТРЫ ДЛЯ МАСШТАБА ---
+            itemHeight: 56, // Увеличиваем высоту кнопок (по дефолту они около 40px)
+            fontSize: 16, // 16px обычно идеален для сайдбара (18px может ломать длинные слова)
+            iconSize: 20, // Увеличиваем иконки, чтобы они не терялись на фоне крупного текста
+            // --- УЛУЧШЕНИЕ ВИЗУАЛА (Опционально) ---
+            darkItemSelectedBg: "#177ddc", // Делаем активную вкладку фирменным синим цветом
+            darkItemHoverBg: "rgba(255, 255, 255, 0.08)", // Легкая подсветка при наведении
+            itemMarginInline: 12, // Делаем аккуратные отступы по бокам, чтобы кнопка не терлась о края сайдбара
           },
           Table: {
             // Фон шапки таблицы (ставь HEX цвет своего --bg-card, судя по всему это #1e222d или #141414)
@@ -241,6 +249,9 @@ function App() {
                           batteryLevel={batteryLevel}
                           batteryTimeRemaining={batteryTimeRemaining}
                           hasGridPower={hasGridPower}
+                          pumpActive={pumpActive}
+                          pumpSpeed={pumpSpeed}
+                          heaterActive={heaterActive}
                         />
                       </Suspense>
                     </ErrorBoundary>

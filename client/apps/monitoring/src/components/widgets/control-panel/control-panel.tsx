@@ -13,6 +13,8 @@ interface ControlPanelProps {
   isAutoMode: any;
   temperatureSetpoint: any;
   hasGridPower: any;
+  heaterActive: any;
+  pumpActive: any;
 }
 
 export const ControlPanel: FC<ControlPanelProps> = ({
@@ -21,6 +23,8 @@ export const ControlPanel: FC<ControlPanelProps> = ({
   isAutoMode,
   temperatureSetpoint,
   hasGridPower,
+  pumpActive,
+  heaterActive,
 }) => {
   const handleToggleHeater = (value: boolean) => {
     sendCommand({ command: SocketEvent.SET_HEATER, value });
@@ -52,14 +56,14 @@ export const ControlPanel: FC<ControlPanelProps> = ({
               <Button
                 type="primary"
                 danger
-                disabled={isControlDisabled}
+                disabled={isControlDisabled || heaterActive}
                 onClick={() => handleToggleHeater(true)}
                 className={styles.btn}
               >
                 Turn on
               </Button>
               <Button
-                disabled={isControlDisabled}
+                disabled={isControlDisabled || !heaterActive}
                 onClick={() => handleToggleHeater(false)}
                 className={styles.btn}
               >
@@ -74,14 +78,14 @@ export const ControlPanel: FC<ControlPanelProps> = ({
             <div className={styles.buttonsRow}>
               <Button
                 type="primary"
-                disabled={isControlDisabled}
+                disabled={isControlDisabled || pumpActive}
                 onClick={() => handleTogglePump(true)}
                 className={styles.btn}
               >
                 Turn on
               </Button>
               <Button
-                disabled={isControlDisabled}
+                disabled={isControlDisabled || !pumpActive}
                 onClick={() => handleTogglePump(false)}
                 className={styles.btn}
               >

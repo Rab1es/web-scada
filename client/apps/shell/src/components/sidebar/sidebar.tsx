@@ -41,8 +41,8 @@ export const Sidebar = () => {
           onClick={() => setCollapsed(!collapsed)}
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           style={{
-            width: 32,
-            height: 32,
+            width: 40,
+            height: 40,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
