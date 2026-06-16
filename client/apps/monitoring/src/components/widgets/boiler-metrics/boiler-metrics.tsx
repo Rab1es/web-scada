@@ -24,7 +24,7 @@ export const BoilerMetrics: FC<BoilerMetricsProps> = ({
       <MetricBlock
         label="Burner status"
         value={flameActive ? "Flame burns" : "No heat"}
-        borderVariant="default"
+        borderVariant={flameActive ? "warning" : "default"}
         valueColor={flameActive ? "warning" : "default"}
         valueVariant="status"
         icon={<FireOutlined className={iconsClassName} />}

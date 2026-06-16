@@ -60,7 +60,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
                   {pumpSpeed} hz
                 </ScadaTypography>
                 {/* Используем наш маленький капс-шрифт для подписи */}
-                <ScadaTypography variant="headerXs">Frequency</ScadaTypography>
+                <ScadaTypography variant="label">Frequency</ScadaTypography>
               </div>
             )}
           />

@@ -48,9 +48,7 @@ export const SafetyMetrics: FC<SafetyMetricsProps> = ({
         label="Outside temperature"
         value={tempOutdoor?.toFixed(1)}
         unit="°C"
-        borderVariant="success"
         valueColor="success"
-        icon={<GlobalOutlined />}
       />
 
       {/* 3. Температура в помещении + Полоска прогресса */}
@@ -58,18 +56,8 @@ export const SafetyMetrics: FC<SafetyMetricsProps> = ({
         label="Indoor temperature"
         value={displayIndoorTemp?.toFixed(1)}
         unit="°C"
-        className={styles.borderPurple}
         valueClassName={styles.textPurple}
-      >
-        <Progress
-          className={styles.customProgress}
-          percent={(tempSupply / 120) * 100}
-          showInfo={false}
-          strokeColor={getProgressColor(tempSupply)}
-          strokeWidth={6}
-          size="small"
-        />
-      </MetricBlock>
+      />
     </WidgetCard>
   );
 };

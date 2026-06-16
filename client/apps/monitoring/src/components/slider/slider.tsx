@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Slider as LibrarySlider, Button, Space, Typography } from "antd";
-
-const { Text } = Typography;
+import { useState, useEffect } from "react";
+import { Slider as LibrarySlider, Button, Space } from "antd";
+import { ScadaTypography } from "../typography";
 
 export const Slider = ({
   title, // Название (например, "Уставки температури (°C)")
@@ -47,7 +46,7 @@ export const Slider = ({
         marginBottom: "20px",
       }}
     >
-      <Text strong>{title}</Text>
+      <ScadaTypography variant="label">{title}</ScadaTypography>
 
       <LibrarySlider
         range={isRange ? { draggableTrack: true } : false}

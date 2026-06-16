@@ -9,21 +9,21 @@
 /* --- ЗАГОЛОВКИ --- */
 /* Головний заголовок сторінки (Оперативні дані...) */
 .header {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 500;
   color: var(--typography-primary);
 }
 
 /* Заголовки карток (Котел, Мережа...) */
 .headerS {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 500;
   color: var(--typography-primary);
 }
 
 /* Дрібні заголовки-підписи (Назви параметрів над цифрами) */
 .headerXs {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--typography-secondar);
   text-transform: uppercase; /* Робимо великими літерами */
@@ -33,7 +33,7 @@
 /* --- ТЕКСТОВІ ЕЛЕМЕНТИ --- */
 /* Звичайний підпис (якщо uppercase з headerXs здасться занадто грубим) */
 .label {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--typography-secondar);
   font-weight: 400;
 }
