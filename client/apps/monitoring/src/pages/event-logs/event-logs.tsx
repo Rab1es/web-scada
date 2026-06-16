@@ -100,13 +100,6 @@ export const EventLogs: React.FC<EventLogsProps> = ({ logs }) => {
         // scrollbarWidth: "none",
       }}
     >
-      <Typography.Title
-        level={3}
-        style={{ marginTop: 0, marginBottom: "24px" }}
-      >
-        Event logs
-      </Typography.Title>
-
       <Table
         columns={columns}
         dataSource={logs}
@@ -118,7 +111,7 @@ export const EventLogs: React.FC<EventLogsProps> = ({ logs }) => {
           showTotal: (total) => `Total records: ${total}`,
         }}
         size="large"
-        scroll={{ y: "calc(100vh - 400px)", x: "max-content" }}
+        scroll={{ y: "calc(100vh - 300px)", x: "max-content" }}
         bordered
       />
     </div>

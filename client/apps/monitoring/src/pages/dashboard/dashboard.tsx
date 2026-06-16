@@ -1,10 +1,8 @@
-import { Row, Col, Card } from "antd";
+import { Row, Col } from "antd";
 import { type FC } from "react";
 import { type DashboardProps } from "@scada/shared-types";
 import styles from "./dashboard.module.css";
 import { BoilerMetrics } from "../../components/widgets/boiler-metrics";
-import { ScadaTypography } from "../../components/typography";
-import { MimicPanel } from "../../components/widgets/mimic-panel";
 import { ControlPanel } from "../../components/widgets/control-panel";
 import { PumpMetrics } from "../../components/widgets/pump-metrics";
 import { SafetyMetrics } from "../../components/widgets/safety-metrics";
@@ -27,12 +25,6 @@ export const Dashboard: FC<DashboardProps> = ({
 }) => {
   return (
     <div className={styles.dashboardContainer}>
-      <div style={{ marginBottom: "24px" }}>
-        <ScadaTypography variant="header">
-          Boiler operational data (Monitoring panel)
-        </ScadaTypography>
-      </div>
-
       <Row gutter={[24, 24]}>
         {/* --- ПОВЕРХ 1: КЕРУВАННЯ (На всю ширину) --- */}
         <Col span={24}>
@@ -70,25 +62,6 @@ export const Dashboard: FC<DashboardProps> = ({
             tempSupply={tempSupply}
             tempIndoor={tempIndoor}
           />
-        </Col>
-
-        {/* --- ПОВЕРХ 3: АНАЛІТИКА (Графік на всю ширину) --- */}
-        <Col span={24}>
-          <div
-            style={{
-              height: "400px",
-              backgroundColor: "rgba(0,0,0,0.2)",
-              borderRadius: "8px",
-              border: "1px dashed #2a2e39",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <ScadaTypography variant="label">
-              Місце для графіка температур (Recharts)
-            </ScadaTypography>
-          </div>
         </Col>
       </Row>
     </div>
