@@ -22,7 +22,7 @@ export const PumpMetrics: FC<PumpMetricsProps> = ({
   const calculatedPercent = (pumpSpeed / MAX_SPEED) * 100;
 
   return (
-    <WidgetCard title="Circulation">
+    <WidgetCard title="Circulation" className={styles.card}>
       {/* --- ВЕРХНИЙ БЛОК: Статус и Кольцо мощности --- */}
       <div className={styles.pumpContainer}>
         {/* Строка статуса с иконкой */}

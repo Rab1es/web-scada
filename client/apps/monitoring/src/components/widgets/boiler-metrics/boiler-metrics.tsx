@@ -20,7 +20,7 @@ export const BoilerMetrics: FC<BoilerMetricsProps> = ({
     ? styles.fireIconActive
     : styles.fireIconDefault;
   return (
-    <WidgetCard title="Boiler">
+    <WidgetCard title="Boiler" className={styles.card}>
       <MetricBlock
         label="Burner status"
         value={flameActive ? "Flame burns" : "No heat"}

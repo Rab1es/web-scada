@@ -28,7 +28,7 @@ export const SafetyMetrics: FC<SafetyMetricsProps> = ({
 
   const isGasAlarm = gasLevel > 0.5;
   return (
-    <WidgetCard title="Environment and Safety">
+    <WidgetCard title="Environment and Safety" className={styles.card}>
       {/* 1. Концентрация газа */}
       <MetricBlock
         label="CH4 concentration"

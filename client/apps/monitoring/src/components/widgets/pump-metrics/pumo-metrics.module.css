@@ -27,3 +27,7 @@
   align-items: center;
   gap: 4px;
 }
+
+.card {
+  height: 100%;
+}
